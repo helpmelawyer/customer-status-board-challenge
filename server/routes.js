@@ -25,7 +25,7 @@ function _buildContext(env) {
 
   _context.backend = {
     hosts: {
-      main: 'http://localhost:3000',
+      main: 'http://customer-status-board-challenge.help-me.kr:5001',
       fallback: 'hostnameAlt',
     },
     domain: env === 'production' ? '.help-me.kr' : '',
