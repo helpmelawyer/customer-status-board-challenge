@@ -207,3 +207,5 @@ dist/**/*.svg
 /npm-debug.log
 /_dist
 !.npmrc
+
+_server
