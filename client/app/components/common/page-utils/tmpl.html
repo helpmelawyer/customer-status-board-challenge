@@ -1,0 +1,8 @@
+<form ng-submit="search()" class="md-block" flex="95" flex-offset="5" layout="row" layout-align="end center">
+    <md-input-container flex ng-repeat="item in vm.searchableItems">
+        <label>{{ item.label }}</label>
+        <input ng-if="item.key" ng-model="inputs[item.key]" ng-change="searchKeyChanged(item)" type="{{ item.type || 'text' }}">
+        <input ng-if="item.keys" ng-model="key" ng-repeat="key in item.keys" type="hidden">
+    </md-input-container>
+    <md-button ng-show="searchableItems.length > 0" class="md-raised md-primary" type="submit">검색</md-button>
+</form>

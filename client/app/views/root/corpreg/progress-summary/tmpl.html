@@ -1,0 +1,163 @@
+<!-- header -->
+<page-header class="page-header" title="'등기팀 현황판'"></page-header>
+<!-- utils (filter/sort) -->
+<section class="page-utils" flex="100" layout="column" ng-class="{ 'selection-mode': $ctrl.selectedProgressIds.length }">
+    <div class="progress-utils" layout="row" layout-align="space-between center">
+        <!-- filter -->
+        <div layout="row" layout-align="start center">
+            <span ng-show="$ctrl.selectedProgressIds.length">
+                <span class="select-label"><strong>{{ $ctrl.selectedProgressIds.length }}개</strong> 선택됨</span>
+                <span class="button-container">
+                    <md-menu>
+                        <md-button ng-click="$mdMenu.open($event)" class="md-raised">선택된 법인에 대해</md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="$ctrl.sendRequestMessage('폼2_수신_재촉', '폼2 재촉')">폼2 재촉문자를 발송합니다.</md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="$ctrl.sendRequestMessage('폼2_수신_재촉_환불', '폼2 재촉 + 환불 예고')">폼2 재촉 + 환불 예고문자를 발송합니다.</md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="$ctrl.sendRequestMessage('신청서_확인_재촉', '신청서 확인 재촉')">신청서 확인 재촉문자를 발송합니다.</md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="$ctrl.sendRequestMessage('전자서명_재촉', '전자서명 재촉')">전자서명 재촉문자를 발송합니다.</md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="$ctrl.sendRequestMessage('도장서류_재촉', '도장날인 서류 재촉')">도장날인 서류 재촉문자를 발송합니다.</md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="$ctrl.sendRequestMessage('사업자등록증_재촉', '사업자등록증 발송 재촉')">사업자등록증 발송 재촉문자를 발송합니다.</md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+            </span>
+            <span ng-hide="$ctrl.selectedProgressIds.length">
+                <span class="select-label">{{ $ctrl.mode }} 현황판 보는 중</span>
+                <md-button class="md-raised" ng-show="$ctrl.mode === 'BM'" ng-click="$ctrl.changeMode('FM')">FM 현황판으로 전환</md-button>
+                <md-button class="md-raised" ng-show="$ctrl.mode === 'FM'" ng-click="$ctrl.changeMode('BM')">BM 현황판으로 전환</md-button>
+            </span>
+            <span class="select-label">우선 순위</span>
+            <md-select ng-model="$ctrl.filterBy.priority" class="priority-list" ng-class="[ progress.priority ]">
+                <md-option ng-value="null">전체</md-option>
+                <md-option ng-repeat="option in $ctrl.progressPriorities track by option.value" ng-value="option.value" ng-class="[ option.value ]">{{ option.label }}</md-option>
+            </md-select>
+            <span class="select-label">업무 카드별 필터</span>
+            <md-select ng-model="$ctrl.filterBy.uncheckedCardAliases">
+                <md-option ng-value="null">전체</md-option>
+                <md-option ng-repeat="card in $ctrl.TASK_CARDS_TO_SHOW_STATUS" ng-value="card.aliases">{{ card.name }}</md-option>
+            </md-select>
+            <span class="select-label">정렬 순서</span>
+            <md-select ng-model="$ctrl.sortBy" ng-change="$ctrl.sortProgress()">
+                <md-option ng-repeat="option in $ctrl.sortCriterias track by option" ng-value="option">{{ option }}</md-option>
+            </md-select>
+            <span>&nbsp;&nbsp;</span>
+            <span ng-show="$ctrl.isFiltering()" class="accent-bg">필터 중</span>
+        </div>
+    </div>
+    <md-progress-linear ng-disabled="!$ctrl.progressListManagerService.progressLoadPromise && !$ctrl.progressListManagerService.itemLoadPromise" class="md-accent" md-mode="indeterminate"></md-progress-linear>
+</section>
+
+<section class="progress-summaries">
+
+    <md-card>
+        <md-card-content>
+            <table class="table FM">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>BM</th>
+                        <th colspan="3">CM</th>
+                        <th colspan="4">DM</th>
+                        <th>BM</th>
+                        <th rowspan="2">FM 공유사항</th>
+                        <th rowspan="2">BM 공유사항</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="left-align">
+                            <div layout="row" layout-align="space-between center">
+                                <span>법인 정보</span>
+                                <span style="margin-left: 150px;">원인일자</span>
+                                <span style="margin-right: 40px;">우선순위</span>
+                            </div>
+                        </th>
+                        <th ng-repeat="card in $ctrl.TASK_CARDS_TO_SHOW_STATUS">{{ card.name }}</th>
+                        <!-- <td></td> -->
+                        <!-- <td></td> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="progress in $ctrl.progresses" ng-class="{
+'held': progress.held,
+'selected': $ctrl.selectedProgressIds.includes(progress.id),
+'long-waiting': progress.status.subCode === '__HELD_BY_CUSTOMER__',
+}" ng-hide="$ctrl.isProgressFilteredOut(progress)">
+                        <td>
+                            <md-checkbox ng-click="$ctrl.selectProgressId(progress.id)"></md-checkbox>
+                        </td>
+                        <!-- 법인 정보 -->
+                        <td>
+                            <div class="corp-info" layout="row" layout-align="space-between center">
+                                <span class="hold-icon-container">
+                                    <md-button class="hold-icon" ng-click="$ctrl.toggleProgressHeld(progress)" ng-class="{ held: progress.held }">
+                                    </md-button>
+                                </span>
+                                <div class="corp-info-text" flex>
+                                    <a class="link hoverable" target="_blank">
+                                        <span class="rnum">{{ progress | progressFullSeqWithCorp }}</span>
+                                        &nbsp;
+                                        <span bind-html bind-html-content="progress | corpNameWithStar"></span>
+                                    </a>
+                                    <div class="tooltip-hover">
+                                        <span>{{ progress.registrationType }}</span>
+                                        <strong ng-show="progress.corpRegTypes.length > 1"> (+)</strong>
+                                        {{ progress.corpRegTypes[0] }}
+                                        <md-tooltip md-direction="bottom" ng-bind-html="progress.corpRegTypes.join('<br>')">
+                                        </md-tooltip>
+                                    </div>
+                                </div>
+                                <div class="corp-info-progress-options" layout="row" layout-align="space-between center">
+                                    <!-- 원인일자는 BM이 볼 필요가 없다. -->
+                                    <span>
+                                        <span class="meta-due-date" bind-html bind-html-content="progress | progressSummaryDueDate"></span>
+                                        <md-datepicker ng-model="progress['원인일자']" md-placeholder="원인일자" ng-required="false"></md-datepicker>
+                                    </span>
+                                    <span>
+                                        <md-select class="priority-list" ng-model="progress.priority" ng-change="progress.put(['priority'])" ng-class="[ progress.priority ]">
+                                            <md-option class="normalize-font-size" ng-repeat="option in $ctrl.progressPriorities track by option.value" ng-value="option.value" ng-class="[ option.value ]">{{ option.label }}</md-option>
+                                        </md-select>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td ng-repeat="taskCardToShow in $ctrl.TASK_CARDS_TO_SHOW_STATUS" class="card-status">
+                            <a class="hoverable"
+                                ng-if="!!$ctrl.getCard(progress, taskCardToShow.name)"
+                                ng-init="card = $ctrl.getCard(progress, taskCardToShow.name)"
+                                target="_blank" ui-sref="corp.progress.taskcard({ corpId: progress.corp._id, progressId: progress.id, taskCardId: card._id })">
+                                <!-- 폼2 수신 -->
+                                <div ng-if="card.alias.name === '__폼2_수신__'" class="checklist-status" ng-class="{ 'is-done': $ctrl.checkChecklistIsDone($ctrl.getForm2Checklist(card)) }">{{ $ctrl.getForm2Checklist(card) | remainingChecklistCount }}</div>
+                                <!-- 기타 -->
+                                <div ng-if="card.alias.name !== '__폼2_수신__'" class="checked-icon">
+                                    <span class="icon" ng-class="{ held: progress.held, 'not-checked': !card.checked }"></span>
+                                </div>
+                                <div ng-show="card.checked" class="checked-date">{{ card.checkedAt | dateFormat }}</div>
+                            </a>
+                        </td>
+                        <!-- FM 메모 -->
+                        <td class="memo">
+                            <a editable-textarea="progress.fmMemo" e-msd-elastic e-rows="4" e-cols="40"><span bind-html bind-html-content="progress.note | progressSummaryMemo | exclamationHighlight"></span></a>
+                        </td>
+                        <!-- BM 메모 -->
+                        <td class="memo">
+                            <a editable-textarea="progress.bmMemo" e-msd-elastic e-rows="4" e-cols="40"><span bind-html bind-html-content="progress.memo | progressSummaryMemo | exclamationHighlight"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-card-content>
+    </md-card>
+</section>

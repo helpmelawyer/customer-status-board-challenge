@@ -1,0 +1,18 @@
+section.root {
+  > md-content {
+    position: relative;
+  }
+
+  > nav {
+    position: relative;
+    z-index: 3;
+  }
+
+  .fab-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+  }
+}

@@ -1,0 +1,19 @@
+<md-button class="md-button-toggle" ng-click="toggle()">
+    <div flex layout="row">
+        {{section.name}}
+        <span flex></span>
+        <span class="md-toggle-icon" ng-class="{'toggled' : isOpen()}" layout-align="center center">
+      <img src="/assets/img/icons/toggle-arrow.svg" width="24">
+    </span>
+    </div>
+    <span class="md-visually-hidden">
+    Toggle {{isOpen()? 'expanded' : 'collapsed'}}
+  </span>
+</md-button>
+
+<ul class="menu-toggle-list" ng-style="{ visibility: renderContent ? 'visible' : 'hidden' }">
+
+    <li ng-repeat="page in section.pages">
+        <menu-link section="page"></menu-link>
+    </li>
+</ul>

@@ -1,0 +1,62 @@
+
+$state-success-text:             #3c763d !default;
+$state-success-bg:               #dff0d8 !default;
+
+$state-info-text:                #31708f !default;
+$state-info-bg:                  #d9edf7 !default;
+
+$state-warning-text:             #8a6d3b !default;
+$state-warning-bg:               #fcf8e3 !default;
+
+$state-danger-text:              #a94442 !default;
+$state-danger-bg:                #f2dede !default;
+
+
+.estimate-helper-container {
+  margin-top: 16px;
+
+  h2 > .small {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .helpMessage-content {
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .estimate-helper {
+    padding: 10px 16px;
+    line-height: 1.6em;
+
+    &.success {
+      background-color: $state-success-bg;
+      color: $state-success-text;
+    }
+
+    &.info {
+      background-color: $state-info-bg;
+      color: $state-info-text;
+    }
+
+    &.warning {
+      background-color: $state-warning-bg;
+      color: $state-warning-text;
+    }
+
+    &.error {
+      background-color: $state-danger-bg;
+      color: $state-danger-text;
+    }
+
+    .helper-content > p {
+      white-space: pre-wrap;
+    }
+  }
+
+  .estimate-helper + .estimate-helper {
+    margin-top: 12px;
+  }
+}

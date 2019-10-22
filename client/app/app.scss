@@ -1,0 +1,528 @@
+
+/**
+ * App-wide Styles
+ */
+
+// color variables
+$helpme-main-color: #00b4e3;
+$helpme-main-color-darken: #0086b8;
+$helpme-light-color: #dcf2fd;
+$text-color: #404041;
+$border-color: #b8b9bb;
+$red-accent-color: #d0021b;
+$green-accent-color: #00a2a7;
+
+$gray-color-light1: #f0f0f0;
+$gray-color-light2: #ccc;
+$gray-color-light3: #9c9c9c;
+$gray-color-light4: #666;
+
+$alert-text-color: #ff4040;
+$alert-bg-color: #f9d3cf;
+$alert-border-color: #f3a69e;
+$warning-text-color: #cc8411;
+$warning-bg-color: #fce7c4;
+$warning-border-color: #f9ce89;
+
+$sidenav-width: 180px;
+$page-min-width: 960px;
+$corpreg-detail-page-max-width: 1500px;
+$admin-progress-task-left-min-width: 610px;
+
+$md-color-50: #e8f0f8;
+$md-color-100: #c5daed;
+$md-color-200: #9fc1e2;
+$md-color-300: #78a8d6;
+$md-color-400: #5b96cd;
+$md-color-500: #3e83c4;
+$md-color-600: #387bbe;
+$md-color-700: #3070b6;
+$md-color-800: #2866af;
+$md-color-900: #1b53a2;
+$md-color-A100: #d9e7ff;
+$md-color-A200: #a6c8ff;
+$md-color-A400: #73a9ff;
+$md-color-A700: #5999ff;
+
+$admin-gray-text-color: white;
+$admin-layered-bs: 1px 0 5px rgba(0,0,0,0.13);
+
+$md-accent-color: rgb(255,64,129);
+
+$progress-state-color-ongoing: #00a2a7;
+$progress-state-color-canceled: #d0021b;
+$progress-state-color-waiting: #7c4ed3;
+
+$highlight-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 15%, rgba(233, 255, 50, 0.4) 15%, rgba(233, 255, 50, 0.4) 50%, rgba(233, 255, 50, 0.4) 85%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0) 100%);
+$highlight-mention-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 15%, rgba(50, 197, 255, 0.3) 15%, rgba(50, 197, 255, 0.3) 50%, rgba(50, 197, 255, 0.3) 85%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0) 100%);
+$highlight-mention-gradient-opaque: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 15%, rgb(198, 237, 254) 15%, rgb(198, 237, 254) 50%, rgb(198, 237, 254) 85%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0) 100%);
+
+$highlight-gray-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 15%, rgba(0, 0, 0, 0.1) 15%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 85%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0) 100%);
+
+@mixin text-underline($color) {
+  text-decoration: none !important;
+
+  > span {
+    box-shadow: 0 0.5px 0 lighten($color, 10%), 0 0.75px 0 lighten($color, 50%);
+  }
+}
+
+html, body {
+  font-family: 'Nanum Barun Gothic', sans-serif;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+input[type="tel"],
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+
+  $input-height: 32px;
+  $input-side-padding: 8px;
+  &.styled-input {
+    &::-ms-clear {
+      display: none;
+    }
+
+    &[readonly]:not(.fake-readonly) {
+      background-color: #f0f0f0;
+      color: #6b6b6b;
+    }
+
+
+    border: 1px solid $border-color;
+    border-radius: 2px;
+
+    width: 100%;
+    line-height: 1em;
+    // font-size: $input-font-size;
+    height: $input-height;
+    padding: 0 $input-side-padding;
+
+    &:focus {
+      border: 2px solid #0086b8;
+      outline: none;
+      padding: {
+        left: $input-side-padding - 1px;
+        right: $input-side-padding - 1px;
+      }
+    }
+  }
+}
+
+[perfect-scrollbar] {
+  position: relative;
+}
+
+.container {
+  width: 100% !important;
+  max-width: 1500px;
+}
+
+.center {
+  text-align: center;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.dialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 49;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#helpme-app {
+  &, & > #view-desktop, & .container {
+    height: 100%;
+  }
+}
+
+.small {
+  font-size: 0.8em;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.hoverable {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+}
+
+
+a.link {
+  color: $text-color;
+
+  padding-top: 0;
+  padding-bottom: 0;
+
+  // a.md-button.link
+  &.md-button, &.hoverable {
+    color: $text-color;
+
+    @include text-underline($text-color);
+  }
+}
+
+.md-button.link {
+  color: $helpme-main-color-darken;
+}
+
+.md-button.ghost {
+  min-height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: $text-color;
+  border: 1px solid $text-color;
+}
+
+.rainbow-accent-color {
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.dim {
+  opacity: 0.5;
+  font-size: 0.7em;
+}
+
+.accent-bg {
+  background-color: $md-accent-color;
+  color: white;
+  padding: 3px 4px;
+  border-radius: 4px;
+}
+
+.accent-color {
+  color: $md-accent-color;
+}
+
+.red-accent-color {
+  color: $red-accent-color;
+}
+
+.green-accent-color {
+  color: $green-accent-color;
+}
+
+.dark-gray-color {
+  color: $gray-color-light4;
+}
+
+.gray-color {
+  color: $gray-color-light3;
+}
+
+.warning-color {
+  color: $warning-text-color;
+}
+
+.info-color {
+  color: $helpme-main-color;
+}
+
+.done {
+  text-decoration: line-through;
+  color: $gray-color-light3;
+}
+
+.cell-value {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.value-true {
+  @extend .info-color;
+  @extend .cell-value;
+}
+
+.value-false {
+  @extend .red-accent-color;
+  @extend .cell-value;
+}
+
+ng-md-icon {
+  fill: inherit;
+}
+
+
+.normalize-appearance {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background-color: white;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+#login {
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: 500px;
+
+  button, #message-login {
+    margin-top: 10px;
+  }
+
+  #message-login {
+    color: $red-accent-color;
+  }
+}
+
+.md-headline {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+md-input-container {
+  .md-errors-spacer {
+    display: none;
+  }
+}
+
+#coupon-create-view {
+  form {
+    button[type="submit"] {
+      width: 100%;
+      margin: 0;
+      margin-top: 15px;
+    }
+  }
+}
+
+#doc-detail {
+  padding: 0 60px;
+
+  .info {
+    > h3 {
+      font-size: 22px;
+      border-bottom: 1px solid $border-color;
+      padding-bottom: 3px;
+    }
+  }
+
+  .header, .content {
+    margin-bottom: 10px;
+  }
+
+  .header {
+    font-weight: bold;
+    margin-right: 15px;
+  }
+
+  .content {
+
+  }
+}
+
+.right-border {
+  border-right: 1px solid $border-color;
+}
+
+.form-inline .form-group {
+  display: block;
+}
+
+
+.tags {
+  display: inline-block;
+  max-width: 100%;
+  margin: -3px;
+
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .buttons {
+    margin: 3px;
+  }
+
+  > .tag {
+    margin: 3px;
+    float: left;
+    font-size: 13px;
+    padding: 4px 8px;
+    line-height: 13px;
+    border: 1px solid $gray-color-light2;
+    color: $gray-color-light3;
+    border-radius: 8px;
+
+  }
+
+  .buttons button {
+    font-size: 11px;
+    line-height: 20px;
+  }
+}
+
+.md-dialog-container {
+  md-toolbar {
+    min-height: 55px;
+    position: sticky;
+    top: 0;
+  }
+}
+
+md-toolbar {
+  height: 55px;
+
+  .md-toolbar-tools {
+    .text {
+      font-size: 14px;
+    }
+  }
+}
+
+section.dialog-width-holder {
+  min-width: 1200px;
+
+  &.wide {
+    min-width: 80vw;
+  }
+}
+
+// 법인 검색 dialog
+md-dialog.corp-search-dialog {
+  min-width: 810px;
+
+  section.page-utils {
+    width: 100%;
+  }
+}
+
+.status-option {
+  &.__ON_GOING__ {
+    color: $progress-state-color-ongoing;
+
+    &.__WAITING_FOR_FOLLOW_UP_REGISTRATION__,
+    &.__HELD_BY_CUSTOMER__ {
+      color: $progress-state-color-waiting;
+    }
+  }
+
+  &.__END__ {
+    color: $gray-color-light3;
+  }
+
+  &.__PAUSE__ {
+    color: $progress-state-color-waiting;
+  }
+
+  &:focus {
+    md-select-value {
+
+      &, &:focus {
+        color: inherit !important;
+      }
+    }
+  }
+}
+
+.md-select-menu-container {
+  md-select-menu {
+    &, & > md-content {
+      max-height: 430px;
+    }
+  }
+}
+
+md-tooltip {
+  height: auto !important;
+  line-height: 1.5em;
+  padding: 5px 10px;
+}
+
+section.root {
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    line-height: 1.5em;
+  }
+
+  > md-content {
+    min-width: $page-min-width !important;
+  }
+
+  md-input-container {
+    > .fake-label {
+      color: rgba(0,0,0,0.38);
+      margin-bottom: 10px;
+    }
+  }
+}
+
+
+$swift-ease-out-duration: 0.4s !default;
+$swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
+
+body.is-animating {
+  section.root {
+    > md-content {
+      transition: margin-left $swift-ease-out-duration $swift-ease-out-timing-function;
+
+      page-header .md-toolbar-tools {
+        transition: padding-left $swift-ease-out-duration $swift-ease-out-timing-function;
+      }
+    }
+  }
+}
+
+body.is-sidenav-open {
+  section.root {
+    > md-content {
+      margin-left: $sidenav-width;
+    }
+  }
+}
+
+body:not(.is-sidenav-open) {
+  section.root {
+    > md-content {
+      page-header .md-toolbar-tools {
+        padding-left: 64px;
+      }
+    }
+  }
+}
+
+@import './app.alert.scss';
+
+@import './components/**/style.scss';
+@import './views/**/style.scss';

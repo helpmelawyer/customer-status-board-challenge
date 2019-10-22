@@ -1,0 +1,504 @@
+
+
+// NOTE: md-option은 DOM 바깥쪽에 있어서 바깥으로 빼 놨다.
+md-select.priority-list,
+md-option {
+  min-width: 80px;
+
+  .md-select-value {
+    .md-select-icon {
+      width: 18px;
+    }
+  }
+
+  &.normalize-font-size {
+    font-size: 14px;
+  }
+
+  &.__1ST_PRIORITY__ {
+    color: $red-accent-color;
+  }
+
+  &.__2ND_PRIORITY_URGENT_REQUEST__,
+  &.__3RD_PRIORITY_SPECIAL_CUSTOMER__ {
+    color: $warning-text-color;
+  }
+
+  &:focus .md-select-value {
+    color: inherit;
+  }
+}
+
+
+corpreg-progress-summary-view {
+  display: block;
+  min-width: 1230px;
+  line-height: 1.05em;
+
+  .select-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+    margin-right: 4px;
+  }
+
+  $select-box-height: 26px;
+
+  $border: 1px solid rgb(210, 210, 210);
+  $light-text-color: #6a6a6a;
+  $lighter-text-color: #9a9a9a;
+  $held-progress-background-color: #F0EBFA;
+  $long-waiting-progress-background-color: rgb(254, 242, 207);
+  $selected-progress-background-color: #fce4ec;
+  $page-utils-height: 49px;
+
+  $color-transition: background-color $swift-ease-out-duration $swift-ease-out-timing-function;
+
+
+  // datepicker button 가리기
+  md-datepicker {
+    &, .md-datepicker-input-container, .md-datepicker-input-container input {
+      height: $select-box-height;
+    }
+
+    .md-datepicker-button {
+      display: none;
+    }
+
+    .md-datepicker-triangle-button {
+      bottom: -5px;
+    }
+  }
+
+  md-select {
+    margin: 0;
+
+    &, md-select-value {
+      height: $select-box-height;
+      box-sizing: border-box !important;
+    }
+  }
+
+  .page-utils {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    transition: $color-transition;
+
+    &.selection-mode {
+      background-color: $selected-progress-background-color;
+    }
+
+    .progress-utils {
+      padding-top: 8px !important;
+
+      md-select {
+        &,
+        .md-select-value {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .progress-summaries {
+    font-size: 14px;
+
+    md-card {
+      margin-top: 0;
+    }
+
+    md-card > md-card-content {
+      padding: 0;
+    }
+
+    .table {
+      width: 100%;
+      border-spacing: 0;
+      table-layout: fixed;
+
+      thead {
+        font-size: 0.9em;
+
+        tr {
+
+          th {
+            text-align: center;
+            padding: 6px 0;
+            color: rgb(80, 80, 80);
+            white-space: pre-wrap;
+
+            position: sticky;
+            z-index: 2;
+
+            &.left-align {
+              text-align: left;
+              padding-left: 1em;
+            }
+          }
+
+          &:nth-child(1) th {
+            background-color: rgb(245, 245, 245);
+            top: 0 + $page-utils-height;
+
+            border: {
+              left: $border;
+              right: $border;
+            };
+          }
+
+          &:nth-child(2) th {
+            background-color: rgb(238, 238, 238);
+            top: 27px + $page-utils-height;
+          }
+
+          &:nth-child(2) th,
+          & th[rowspan] {
+            border-bottom: $border;
+            border-bottom-color: rgb(140, 140, 140);
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          transition: $color-transition;
+
+          &:not(:last-child):not(.ng-hide) td {
+            border-bottom: $border;
+            border-bottom-color: rgb(150, 150, 150);
+          }
+
+          td {
+            text-align: center;
+
+            $corp-info-padding-v: 4px;
+            $corp-info-padding-h: 10px;
+
+            &.card-status {
+              .hoverable {
+                padding: 4px;
+              }
+            }
+
+            &.memo {
+              font-size: 12px;
+              line-height: 1.7em;
+              text-align: left;
+              padding: $corp-info-padding-v $corp-info-padding-h;
+
+              a {
+                text-decoration: none;
+                border-bottom: none;
+                color: $text-color;
+                white-space: pre-wrap;
+              }
+
+              a.editable-empty {
+                text-decoration: underline;
+                color: desaturate(lighten($helpme-main-color-darken, 40%), 50%);
+              }
+
+              .bold {
+                font-weight: 600;
+              }
+
+              .highlighted {
+                background: $highlight-gradient;
+              }
+            }
+
+            md-checkbox {
+              margin-bottom: 0;
+            }
+
+            .corp-info {
+              text-align: left;
+
+              font-size: 11px;
+              color: $light-text-color;
+
+              .corp-info-text {
+                color: $text-color;
+
+                a, .tooltip-hover {
+                  padding: $corp-info-padding-v / 2 $corp-info-padding-h / 2;
+                }
+
+                a {
+                  display: inline-block;
+                  border-radius: 2px;
+
+                  span {
+                    // underline is implemented with box-shadow
+                    box-shadow: none;
+                  }
+
+                  span:not(.rnum) {
+                    font-size: 1.25em;
+                    font-weight: 600;
+                  }
+
+                  span.rnum {
+                    background-color: rgb(240, 240, 240);
+                    border-radius: 2px;
+                    padding: 2px 4px;
+                  }
+                }
+
+                .tooltip-hover {
+                  margin-top: $corp-info-padding-v / 2;
+
+                  &:hover {
+                    cursor: pointer;
+                  }
+                }
+              }
+
+              .tooltip-hover {
+                color: $light-text-color;
+
+                // text-single-line-ellipsis
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+
+              .corp-info-progress-options {
+                padding: $corp-info-padding-v $corp-info-padding-h;
+
+                .label {
+                  color: $lighter-text-color;
+                }
+
+                .right-padding {
+                  padding-right: 6px;
+                }
+
+                .left-padding {
+                  padding-left: 6px;
+                }
+
+                .md-datepicker-input {
+                  color: $light-text-color;
+                  font-size: 12px;
+                }
+              }
+
+              .hold-icon-container {
+                .hold-icon {
+                  $hold-icon-size: 22px;
+                  margin: 0;
+                  padding: 0;
+                  min-width: 0;
+                  min-height: 0;
+
+                  width: $hold-icon-size;
+                  height: $hold-icon-size;
+                  border: 1px solid transparent;
+
+                  background-size: 90%;
+                  background-position: center center;
+                  background-repeat: no-repeat;
+
+                  & {
+                    background-image: url(/assets/img/icons/unlock.svg);
+                  }
+
+                  &:hover,
+                  &:active,
+                  &.held {
+                    background-image: url(/assets/img/icons/lock.svg);
+                  }
+
+                  &.held {
+                    border-color: $progress-state-color-waiting;
+                  }
+
+                  &.held:hover,
+                  &.held:active {
+                    background-image: url(/assets/img/icons/unlock.svg);
+                  }
+                }
+              }
+            }
+
+            .checked-icon {
+              display: inline-block;
+
+              .icon {
+                display: inline-block;
+                width: 15px;
+                height: 20px;
+
+                background: {
+                  image: url(/assets/img/icons/check.svg);
+                  size: 100%;
+                  position: center center;
+                  repeat: no-repeat;
+                };
+
+                &.held {
+                  background-image: url(/assets/img/icons/check-purple.svg);
+                }
+
+                &.not-checked {
+                  background-image: url(/assets/img/icons/check-light.svg);
+                }
+              }
+            }
+
+            .checklist-status {
+              line-height: 26px;
+              color: $gray-color-light2;
+
+              &.is-done {
+                color: $text-color;
+              }
+            }
+
+            .checked-date {
+              font-size: 11px;
+              color: $light-text-color;
+            }
+          }
+
+          &.separator td {
+            border-bottom: {
+              width: 2px !important;
+              color: $light-text-color !important;
+            };
+          }
+
+          &.bold-separator td {
+            border-bottom: {
+              width: 60px !important;
+              color: white !important;
+            };
+          }
+
+          &.bold-separator + tr td {
+            border-top: {
+              width: 2px;
+              color: $light-text-color;
+              style: solid;
+            };
+          }
+
+          &.long-waiting {
+            background-color: $long-waiting-progress-background-color;
+          }
+
+
+          &.held {
+            background-color: $held-progress-background-color;
+
+            td {
+              .checked-icon {
+                svg {
+                  fill: $progress-state-color-waiting;
+                }
+              }
+            }
+          }
+
+          &.selected {
+            background-color: $selected-progress-background-color;
+          }
+        }
+      }
+
+      tr {
+        th, td {
+
+          $cell-width: 60px;
+
+          &:not([colspan]) {
+            width: $cell-width;
+          }
+
+          // &[colspan="2"] {
+          //   width: $cell-width * 2;
+          // }
+
+          &[colspan="3"] {
+            width: $cell-width * 3;
+          }
+
+          &[colspan="4"] {
+            width: $cell-width * 4;
+          }
+
+          &:nth-child(1) {
+            width: 40px;
+          }
+
+          &:nth-child(2) {
+            width: 510px;
+          }
+        }
+      }
+    }
+
+    .table.FM {
+
+      thead, tbody {
+        tr td,
+        tr th {
+          &:nth-last-child(1),
+          &:nth-last-child(2) {
+            width: 20%;
+          }
+        }
+      }
+
+      tbody tr {
+        td {
+          // TODO: 하드코딩되어있는거 별로인거같은데
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(6),
+          &:nth-child(10),
+          &:nth-last-child(2),
+          &:nth-last-child(3) {
+            border-right: $border;
+          }
+        }
+      }
+    }
+
+    .table.BM {
+
+      thead, tbody {
+        tr td,
+        tr th {
+          &:first-child {
+            // width: 450px;
+          }
+          &:nth-last-child(1) {
+            width: 25%;
+          }
+
+          &:nth-last-child(2) {
+            width: 18%;
+          }
+        }
+      }
+
+      tbody tr {
+        td {
+          // TODO: 하드코딩되어있는거 별로인거같은데
+          &:nth-child(2),
+          &:nth-child(7),
+          &:nth-last-child(2),
+          &:nth-last-child(3) {
+            border-right: $border;
+          }
+        }
+      }
+    }
+
+  }
+}

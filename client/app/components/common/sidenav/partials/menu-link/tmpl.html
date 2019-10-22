@@ -1,0 +1,15 @@
+<!-- ui-sref가 없을 때 -->
+<md-button ng-if="!section.stateName" ng-class="{'active' : $ctrl.isSelected()}" ng-click="selectPage()">
+    {{ section.name }}
+    <span class="md-visually-hidden" ng-if="$ctrl.isSelected()">
+    current page
+  </span>
+</md-button>
+<!-- ui-sref가 있을 때 -->
+<a md-button ng-if="section.stateName" ng-class="{'active' : $ctrl.isSelected()}" ui-sref="{{ section.stateName }}" ng-click="selectPage()">
+  {{ section.name }}
+  <span class="md-visually-hidden"
+    ng-if="$ctrl.isSelected()">
+    current page
+  </span>
+</a>

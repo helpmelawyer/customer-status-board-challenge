@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang='ko' xmlns:fb='http://ogp.me/ns/fb#'>
+  <head prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#">
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    base(href='/')
+    title #{title}
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css')
+    meta(name='title', content=title)
+    meta(name='viewport', content='width=device-width')
+    meta(name='format-detection', content='telephone=no')
+  </head>
+  <body id="helpme-app" ng-app="HelpmeAdminApp" ng-class="{ 'is-sidenav-open': isSidenavOpen, 'is-animating': isAnimating }">
+    div(ui-view='', ng-attr-id="{{ 'view-' + viewType }}", ng-cloak='')
+    div(ui-view='dialog')
+    script.
+      window.helpme = {};
+      window.backend = {
+        hosts: !{JSON.stringify(backend.hosts)},
+        domain: "#{backend.domain}",
+      };
+  </body>
+</html>

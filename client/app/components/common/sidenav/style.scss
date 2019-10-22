@@ -1,0 +1,134 @@
+
+.sidenav-open-trigger {
+  position: fixed;
+  top: 10px;
+  left: 0;
+  margin: 0;
+  min-width: 0;
+  width: 48px;
+  height: 48px;
+  z-index: 6;
+}
+
+corp-detail-sidenav, sidenav {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  md-sidenav {
+    width: $sidenav-width;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+
+    md-toolbar {
+      background-color: white !important;
+      color: $helpme-main-color-darken !important;
+      font-weight: 600;
+
+      h1 span {
+        font-size: 16px;
+      }
+
+      h1 .md-button {
+        margin-left: 0;
+        min-width: 0;
+        padding-left: 12px;
+        padding-right: 12px;
+
+        img {
+          width: 24px;
+          height: 24px;
+          transform: rotate(90deg);
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .menu {
+      background-color: #f5f5f5;
+      height: calc(100% - 55px);
+
+      a.active {
+        background-color: rgba(158,158,158,0.2);
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .menu-toggle-list {
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        -webkit-transition-property: height;
+        -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        -moz-transition-property: height;
+        transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        transition-property: height;
+
+        a.md-button {
+          display: block;
+          padding: 0 16px 0 32px;
+          text-transform: none;
+          font-weight: 500;
+        }
+      }
+
+      .menu-nested-list > li {
+        menu-toggle menu-link a[ui-sref] {
+          padding-left: 22px;
+        }
+      }
+
+      .md-button, a[ui-sref]:not(.header) {
+        border-radius: 0;
+        color: $text-color;
+        cursor: pointer;
+        display: block;
+        align-items: inherit;
+        line-height: 40px;
+        margin: 0;
+        max-height: 40px;
+        overflow: hidden;
+        padding: 0px 12px;
+        text-align: left;
+        text-decoration: none;
+        white-space: normal;
+        width: 100%;
+
+        font-size: 13px;
+      }
+
+      .menu-heading {
+        display: flex;
+        line-height: 32px;
+        margin: 0;
+        padding: 8px 16px 0;
+        text-align: left;
+        color: $text-color;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(0, 0, 0, .2);
+      }
+
+      .md-toggle-icon {
+        > img {
+          transition: transform 0.3s ease-in-out;
+          transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+          height: 100%;
+
+        }
+
+        &.toggled > img {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

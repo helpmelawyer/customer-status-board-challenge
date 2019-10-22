@@ -1,0 +1,13 @@
+<!-- NOTE 지급명령 어드민 통합을 염두해 둔 설계 (지급명령과 공통으로 쓸 수 있는 템플릿들은 모두 partials-material 안에 넣어놓음) -->
+<!-- TODO admin.layout.html -> ../admin.layout.html + ../admin.html 통합 -->
+<!-- partials에는 menu, table, page-utils 등등만 남아있을 수 있도록... -->
+<section class="root" layout="row" layout-align="stretch" flex style="height: 100%;">
+
+    <!-- 왼쪽의 메뉴 -->
+    <nav ui-view="sidenav" layout-align="stretch" md-whiteframe="2">
+    </nav>
+
+    <!-- 페이지 -->
+    <md-content ui-view="page" ng-class="rootViewClassName" flex page-scroll-to-top>
+    </md-content>
+</section>

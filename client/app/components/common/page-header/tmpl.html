@@ -1,0 +1,9 @@
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+        <span ncy-page-header>{{ vm.title }}</span>
+        <md-button ng-show="canGoBack" onclick="history.go(-1)">뒤로</md-button>
+        <span flex></span>
+        <span class="text">{{ vm.userName ? (vm.userName + '님 오늘도 멋지십니다.') : '' }}</span>
+        <md-button ng-click="vm.logout()">로그아웃</md-button>
+    </div>
+</md-toolbar>

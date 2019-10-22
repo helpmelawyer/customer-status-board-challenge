@@ -1,0 +1,16 @@
+<!-- page-header -->
+<page-header class="page-header" title="vm.title"></page-header>
+<!-- page-utils -->
+<page-utils class="page-utils" layout="row" layout-align="end center" searchable-items="vm.searchableItems"></page-utils>
+<!-- table -->
+<material-table class="table"
+    search-table-target="vm.searchTableTarget"
+    on-table-item-clicked="vm.onTableItemClicked"
+    table-callback="vm.tableCallback"
+    get-table-data="vm.getFetchItemPromise"
+    class-name="vm.table.className"
+    schemas="vm.table.schemas"
+    page-limit="vm.table.paginationLimit"
+    data="vm.table.items"
+    prevent-initial-table-load="vm.table.preventInitialTableLoad">
+</material-table>
