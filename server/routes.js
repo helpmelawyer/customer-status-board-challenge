@@ -57,7 +57,7 @@ module.exports = function (app, compiler = null) {
     const { skip = -1, limit = -1, progressId } = req.query;
     await throttle(1000);
 
-    const filteredCards = progressId ? cards.filter(card => card.ref.progress === progressId) : cards;
+    const filteredCards = progressId ? cards.filter(card => card.ref.progress === Number(progressId)) : cards;
     if (limit > 0) {
       return res.json(filteredCards.slice(Math.max(0, skip), limit));
     } else {
